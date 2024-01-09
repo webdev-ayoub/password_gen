@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a progressive web app that generates strong passwords for free. 
+    You can install it on your device with a single click.">
+    <meta name="theme-color" content="white">
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link crossorigin="anonymous" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <script defer src="script.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body,
+        footer small {
+            background-color: aliceblue;
+        }
+
+        #box {
+            max-width: 550px;
+        }
+
+        #privacy {
+            color: black;
+        }
+
+        #privacy:hover {
+            color: white;
+            background-color: blue;
+        }
+
+        .offcanvas {
+            transition: 1s all ease-in-out;
+        }
+
+        #result {
+            outline: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-bottom: 5px solid #000 !important;
+        }
+
+        #result::placeholder {
+            color: #FFF;
+        }
+
+        #action_box {
+            animation: fade 2s;
+        }
+
+        @-webkit-keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-moz-keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-o-keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        /* loader */
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-o-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <title>PASSWORD GENERATOR-X</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="m-auto loader"></div>
+    <div class="container m-auto d-none text-center">
+        <img src="logo.png" class="img-fluid rounded-circle mx-auto shadow my-0 p-0" style="width: 100px;height: 100px;"
+            alt="logo">
+        <div id="box" class="d-flex flex-column mt-5 mx-auto gap-5 pb-3 p-3 rounded shadow mx-auto"
+            style="background-color: #96B6C5;">
+            <div class="d-flex gap-2">
+                <input type="text" id="result" class="form-control text-center fs-4 py-2 bg-primary text-white"
+                    placeholder="_Generated_Password_" readonly>
+            </div>
+            <div class="d-none justify-content-center align-items-center gap-4" id="action_box">
+                <button type="button" class="btn btn-dark shadow text-uppercase fw-bold" id="share">Share</button>
+                <button type="button" class="btn btn-light shadow text-uppercase fw-bold" id="copy">
+                    Copy
+                </button>
+            </div>
+            <div class="mx-auto">
+                <button type="button"
+                    class="btn btn-lg btn-primary btn-outline-dark py-2 px-4 text-white border-0 fw-bold text-uppercase"
+                    id="gen">
+                    Generate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto w-100 bg-dark text-center text-white fw-bold p-1 d-none 
+  flex-column gap-2 justify-content-center">
+        <small class="w-100 text-uppercase text-black fs-5 border-none">Copyright &copy;</small>
+    </footer>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener('load', async () => {
+                await navigator.serviceWorker.register("sw.js");
+            });
+        }
+    </script>
+</body>
+
+</html>
